@@ -1,0 +1,26 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>JSMin.NET</id>
+    <version>1.0.0</version>
+	<title>JSMin for .Net</title>
+    <authors>Andrey Taritsyn</authors>
+    <owners>Andrey Taritsyn</owners>
+    <licenseUrl>http://github.com/Taritsyn/JSMin.NET/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://github.com/Taritsyn/JSMin.NET</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A .NET port of the Douglas Crockford's JSMin (http://github.com/douglascrockford/JSMin).</description>
+    <summary>A .NET port of the Douglas Crockford's JSMin.</summary>
+	<copyright>Copyright 2013 Andrey Taritsyn - http://www.taritsyn.ru</copyright>
+    <language>en-US</language>
+    <tags>Douglas Crockford JSMin JavaScript JS Minification Minifier Minify</tags>
+    <references>
+      <reference file="DouglasCrockford.JsMin.dll" />
+    </references>
+  </metadata>
+  <files>
+    <file src="..\..\DouglasCrockford.JsMin\bin\Release\DouglasCrockford.JsMin.dll" target="lib\net40" />
+	<file src="readme.txt" />
+	<file src="license.txt" />
+  </files>
+</package>
