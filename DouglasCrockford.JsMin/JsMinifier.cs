@@ -33,239 +33,325 @@ using System.IO;
 
 namespace DouglasCrockford.JsMin
 {
+	/// <summary>
+	/// The JavaScript Minifier
+	/// </summary>
     public sealed class JsMinifier
     {
         const int EOF = -1;
 
-		StringReader sr;
-		StringWriter sw;
-        int theA;
-        int theB;
-        int theLookahead = EOF;
-		int theX = EOF;
-		int theY = EOF;
+		private StringReader _reader;
+		private StringWriter _writer;
 
-		/* isAlphanum -- return true if the character is a letter, digit, underscore,
-				dollar sign, or non-ASCII character.
-		*/
-		static bool isAlphanum(int c)
+        private int _theA;
+		private int _theB;
+		private int _theLookahead = EOF;
+		private int _theX = EOF;
+		private int _theY = EOF;
+
+		/// <summary>
+		/// Synchronizer of minification
+		/// </summary>
+		private readonly object _minificationSynchronizer = new object();
+
+
+		/// <summary>
+		/// Removes a comments and unnecessary whitespace from JavaScript code
+		/// </summary>
+		/// <param name="content">JavaScript content</param>
+		/// <returns>Minified JavaScript content</returns>
+		public String Minify(string content)
+		{
+			string minifiedContent;
+
+			lock (_minificationSynchronizer)
+			{
+				_theA = 0;
+				_theB = 0;
+				_theLookahead = EOF;
+				_theX = EOF;
+				_theY = EOF;
+
+				using (_reader = new StringReader(content))
+				using (_writer = new StringWriter())
+				{
+					InnerMinify();
+					_writer.Flush();
+
+					minifiedContent = _writer.ToString().TrimStart();
+				}
+
+				_reader = null;
+				_writer = null;
+			}
+
+			return minifiedContent;
+		}
+		
+		/// <summary>
+		/// Returns a true if the character is a letter, digit, underscore, dollar sign, or non-ASCII character
+		/// </summary>
+		/// <param name="c">The character</param>
+		/// <returns>Result of check</returns>
+		private static bool IsAlphanum(int c)
 		{
 			return ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') ||
-					(c >= 'A' && c <= 'Z') || c == '_' || c == '$' || c == '\\' ||
-					c > 126);
+				(c >= 'A' && c <= 'Z') || c == '_' || c == '$' || c == '\\' ||
+				c > 126);
 		}
 
-		/* get -- return the next character from stdin. Watch out for lookahead. If
-				the character is a control character, translate it to a space or
-				linefeed.
-		*/
-		int get()
+		/// <summary>
+		/// Returns a next character from input stream. Watch out for lookahead.
+		/// If the character is a control character, translate it to a space or linefeed.
+		/// </summary>
+		/// <returns>The character</returns>
+		private int Get()
 		{
-			int c = theLookahead;
-			theLookahead = EOF;
+			int c = _theLookahead;
+			_theLookahead = EOF;
+
 			if (c == EOF)
 			{
-				c = sr.Read();
+				c = _reader.Read();
 			}
+
 			if (c >= ' ' || c == '\n' || c == EOF)
 			{
 				return c;
 			}
+
 			if (c == '\r')
 			{
 				return '\n';
 			}
+
 			return ' ';
 		}
 
-		/* peek -- get the next character without getting it.
-		*/
-		int peek()
+		/// <summary>
+		/// Gets a next character without getting it
+		/// </summary>
+		/// <returns>The character</returns>
+		private int Peek()
 		{
-			theLookahead = get();
-			return theLookahead;
+			_theLookahead = Get();
+
+			return _theLookahead;
 		}
 
-		/* next -- get the next character, excluding comments. peek() is used to see
-				if a '/' is followed by a '/' or '*'.
-		*/
-		int next()
+		/// <summary>
+		/// Gets a next character, excluding comments. 
+		/// <code>Peek()</code> is used to see if a '/' is followed by a '/' or '*'.
+		/// </summary>
+		/// <returns>The character</returns>
+		private int Next()
 		{
-			int c = get();
+			int c = Get();
+
 			if (c == '/')
 			{
-				switch (peek())
+				switch (Peek())
 				{
 					case '/':
 						for (;;)
 						{
-							c = get();
+							c = Get();
+
 							if (c <= '\n')
 							{
 								break;
 							}
 						}
+
 						break;
 					case '*':
-						get();
+						Get();
+
 						while (c != ' ')
 						{
-							switch (get())
+							switch (Get())
 							{
 								case '*':
-									if (peek() == '/')
+									if (Peek() == '/')
 									{
-										get();
+										Get();
 										c = ' ';
 									}
+
 									break;
 								case EOF:
 									throw new JsMinificationException("Unterminated comment.");
 							}
 						}
+
 						break;
 				}
 			}
-			theY = theX;
-			theX = c;
+
+			_theY = _theX;
+			_theX = c;
+
 			return c;
 		}
 
-		/* action -- do something! What you do is determined by the argument:
-				1   Output A. Copy B to A. Get the next B.
-				2   Copy B to A. Get the next B. (Delete A).
-				3   Get the next B. (Delete B).
-		   action treats a string as a single character. Wow!
-		   action recognizes a regular expression if it is preceded by ( or , or =.
-		*/
-		void action(int d)
+		/// <summary>
+		/// Do something! What you do is determined by the argument:
+		///		1 - Output A. Copy B to A. Get the next B.
+		///		2 - Copy B to A. Get the next B. (Delete A).
+		///		3 - Get the next B. (Delete B).
+		/// <code>Action</code> treats a string as a single character.
+		/// Wow! <code>Action</code> recognizes a regular expression 
+		/// if it is preceded by <code>(</code> or , or <code>=</code>.
+		/// </summary>
+		/// <param name="d">Action type</param>
+		private void Action(int d)
 		{
 			if (d == 1)
 			{
-				put(theA);
+				Put(_theA);
+
 				if (
-					(theY == '\n' || theY == ' ') &&
-					(theA == '+' || theA == '-' || theA == '*' || theA == '/') &&
-					(theB == '+' || theB == '-' || theB == '*' || theB == '/')
+					(_theY == '\n' || _theY == ' ') &&
+					(_theA == '+' || _theA == '-' || _theA == '*' || _theA == '/') &&
+					(_theB == '+' || _theB == '-' || _theB == '*' || _theB == '/')
 				)
 				{
-					put(theY);
+					Put(_theY);
 				}
 			}
+
 			if (d <= 2)
 			{
-				theA = theB;
-				if (theA == '\'' || theA == '"' || theA == '`')
+				_theA = _theB;
+
+				if (_theA == '\'' || _theA == '"' || _theA == '`')
 				{
 					for (;;)
 					{
-						put(theA);
-						theA = get();
-						if (theA == theB)
+						Put(_theA);
+						_theA = Get();
+
+						if (_theA == _theB)
 						{
 							break;
 						}
-						if (theA == '\\')
+
+						if (_theA == '\\')
 						{
-							put(theA);
-							theA = get();
+							Put(_theA);
+							_theA = Get();
 						}
-						if (theA == EOF)
+
+						if (_theA == EOF)
 						{
 							throw new JsMinificationException("Unterminated string literal.");
 						}
 					}
 				}
 			}
+
 			if (d <= 3)
 			{
-				theB = next();
-				if (theB == '/' && (
-					theA == '(' || theA == ',' || theA == '=' || theA == ':' ||
-					theA == '[' || theA == '!' || theA == '&' || theA == '|' ||
-					theA == '?' || theA == '+' || theA == '-' || theA == '~' ||
-					theA == '*' || theA == '/' || theA == '{' || theA == '\n'
+				_theB = Next();
+				if (_theB == '/' && (
+					_theA == '(' || _theA == ',' || _theA == '=' || _theA == ':' ||
+					_theA == '[' || _theA == '!' || _theA == '&' || _theA == '|' ||
+					_theA == '?' || _theA == '+' || _theA == '-' || _theA == '~' ||
+					_theA == '*' || _theA == '/' || _theA == '{' || _theA == '\n'
 				))
 				{
-					put(theA);
-					if (theA == '/' || theA == '*')
+					Put(_theA);
+
+					if (_theA == '/' || _theA == '*')
 					{
-						put(' ');
+						Put(' ');
 					}
-					put(theB);
+
+					Put(_theB);
+
 					for (;;)
 					{
-						theA = get();
-						if (theA == '[')
+						_theA = Get();
+
+						if (_theA == '[')
 						{
 							for (;;)
 							{
-								put(theA);
-								theA = get();
-								if (theA == ']')
+								Put(_theA);
+								_theA = Get();
+
+								if (_theA == ']')
 								{
 									break;
 								}
-								if (theA == '\\')
+
+								if (_theA == '\\')
 								{
-									put(theA);
-									theA = get();
+									Put(_theA);
+									_theA = Get();
 								}
-								if (theA == EOF)
+
+								if (_theA == EOF)
 								{
 									throw new JsMinificationException("Unterminated set in Regular Expression literal.");
 								}
 							}
 						}
-						else if (theA == '/')
+						else if (_theA == '/')
 						{
-							switch (peek())
+							switch (Peek())
 							{
 								case '/':
 								case '*':
 									throw new JsMinificationException("Unterminated set in Regular Expression literal.");
 							}
+
 							break;
 						}
-						else if (theA == '\\')
+						else if (_theA == '\\')
 						{
-							put(theA);
-							theA = get();
+							Put(_theA);
+							_theA = Get();
 						}
-						if (theA == EOF) {
+
+						if (_theA == EOF) {
 							throw new JsMinificationException("Unterminated Regular Expression literal.");
 						}
-						put(theA);
+
+						Put(_theA);
 					}
-					theB = next();
+
+					_theB = Next();
 				}
 			}
 		}
 
-		/* jsmin -- Copy the input to the output, deleting the characters which are
-				insignificant to JavaScript. Comments will be removed. Tabs will be
-				replaced with spaces. Carriage returns will be replaced with linefeeds.
-				Most spaces and linefeeds will be removed.
-		*/
-		void jsmin()
+		/// <summary>
+		/// Copies a input to the output, deleting the characters which are insignificant to JavaScript.
+		/// Comments will be removed. Tabs will be replaced with spaces.
+		/// Carriage returns will be replaced with linefeeds. Most spaces and linefeeds will be removed.
+		/// </summary>
+		private void InnerMinify()
 		{
-			if (peek() == 0xEF)
+			if (Peek() == 0xEF)
 			{
-				get();
-				get();
-				get();
+				Get();
+				Get();
+				Get();
 			}
-			theA = '\n';
-			action(3);
-			while (theA != EOF)
+
+			_theA = '\n';
+			Action(3);
+
+			while (_theA != EOF)
 			{
-				switch (theA)
+				switch (_theA)
 				{
 					case ' ':
-						action(isAlphanum(theB) ? 1 : 2);
+						Action(IsAlphanum(_theB) ? 1 : 2);
 						break;
 					case '\n':
-						switch (theB)
+						switch (_theB)
 						{
 							case '{':
 							case '[':
@@ -274,24 +360,25 @@ namespace DouglasCrockford.JsMin
 							case '-':
 							case '!':
 							case '~':
-								action(1);
+								Action(1);
 								break;
 							case ' ':
-								action(3);
+								Action(3);
 								break;
 							default:
-								action(isAlphanum(theB) ? 1 : 2);
+								Action(IsAlphanum(_theB) ? 1 : 2);
 								break;
 						}
+
 						break;
 					default:
-						switch (theB)
+						switch (_theB)
 						{
 							case ' ':
-								action(isAlphanum(theA) ? 1 : 3);
+								Action(IsAlphanum(_theA) ? 1 : 3);
 								break;
 							case '\n':
-								switch (theA)
+								switch (_theA)
 								{
 									case '}':
 									case ']':
@@ -301,40 +388,32 @@ namespace DouglasCrockford.JsMin
 									case '"':
 									case '\'':
 									case '`':
-										action(1);
+										Action(1);
 										break;
 									default:
-										action(isAlphanum(theA) ? 1 : 3);
+										Action(IsAlphanum(_theA) ? 1 : 3);
 										break;
 								}
+
 								break;
 							default:
-								action(1);
+								Action(1);
 								break;
 						}
+
 						break;
 				}
 			}
 		}
 
-		public String Minify(string js)
-		{
-			using (sr = new StringReader(js))
-			{
-				using (sw = new StringWriter())
-				{
-					jsmin();
-					sw.Flush();
-
-					return sw.ToString().TrimStart();
-				}
-			}
-		}
-
 		#region Methods for substitution methods of the C language
-		void put(int c)
+		/// <summary>
+		/// Puts a character to output stream 
+		/// </summary>
+		/// <param name="c">The character</param>
+		private void Put(int c)
         {
-            sw.Write((char)c);
+            _writer.Write((char)c);
 		}
 		#endregion
 	}
