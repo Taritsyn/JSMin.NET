@@ -7,14 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DouglasCrockford.JsMin", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F8B5DDE5-1532-473B-A80C-0DC559B8EAC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DouglasCrockford.JsMin.Tests", "test\DouglasCrockford.JsMin.Test\DouglasCrockford.JsMin.Tests.csproj", "{8AA60DEA-FF01-4F54-9BB5-9E79E97EB25C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{191A86C1-B572-4BF6-9480-F3AA8C81375B}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DouglasCrockford.JsMin.Test", "test\DouglasCrockford.JsMin.Test\DouglasCrockford.JsMin.Test.csproj", "{8AA60DEA-FF01-4F54-9BB5-9E79E97EB25C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
