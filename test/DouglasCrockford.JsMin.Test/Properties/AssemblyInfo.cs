@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("JSMin for .Net : Tests")]
-[assembly: AssemblyCopyright("Copyright © Andrey Taritsyn 2013")]
+[assembly: AssemblyCopyright("Copyright © 2013-2016 Andrey Taritsyn")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
