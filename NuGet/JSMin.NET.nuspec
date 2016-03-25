@@ -19,7 +19,7 @@
 		</references>
 	</metadata>
 	<files>
-		<file src="..\src\DouglasCrockford.JsMin\bin\Release\DouglasCrockford.JsMin.dll" target="lib\net40" />
+		<file src="..\src\DouglasCrockford.JsMin\bin\Release\DouglasCrockford.JsMin.dll" target="lib\net40-client" />
 		<file src="readme.txt" />
 		<file src="license.txt" />
 	</files>
