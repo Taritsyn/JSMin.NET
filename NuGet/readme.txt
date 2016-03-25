@@ -1,7 +1,7 @@
 ﻿
 
    ----------------------------------------------------------------------
-                    README file for JSMin for .Net 1.0.0
+                   README file for JSMin for .Net v1.0.1
 
    ----------------------------------------------------------------------
 
@@ -13,6 +13,12 @@
    ===========
    A .NET port of the Douglas Crockford's JSMin
    (http://github.com/douglascrockford/JSMin).
+
+   =============
+   RELEASE NOTES
+   =============
+   1. Assembly is now targeted on the .NET Framework 4 Client Profile;
+   2. “JSMin.NET” NuGet package renamed to “DouglasCrockford.JsMin”.
 
    =============
    DOCUMENTATION
