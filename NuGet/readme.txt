@@ -1,7 +1,7 @@
 ﻿
 
    ----------------------------------------------------------------------
-                   README file for JSMin for .Net v1.0.1
+                 README file for JSMin for .Net v1.0.1 RC 1
 
    ----------------------------------------------------------------------
 
@@ -17,8 +17,7 @@
    =============
    RELEASE NOTES
    =============
-   1. Assembly is now targeted on the .NET Framework 4 Client Profile;
-   2. “JSMin.NET” NuGet package renamed to “DouglasCrockford.JsMin”.
+   Added support of .NET Core 5 RC 1.
 
    =============
    DOCUMENTATION

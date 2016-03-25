@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>DouglasCrockford.JsMin</id>
-		<version>1.0.1</version>
+		<version>1.0.1-rc1</version>
 		<title>JSMin for .Net</title>
 		<authors>Andrey Taritsyn</authors>
 		<owners>Andrey Taritsyn</owners>
@@ -12,16 +12,28 @@
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>JSMin.NET is a .NET port of the Douglas Crockford's JSMin (http://github.com/douglascrockford/JSMin).</description>
 		<summary>JSMin.NET is a .NET port of the Douglas Crockford's JSMin.</summary>
-		<releaseNotes>1. Assembly is now targeted on the .NET Framework 4 Client Profile;
-2. “JSMin.NET” NuGet package renamed to “DouglasCrockford.JsMin”.</releaseNotes>
+		<releaseNotes>Added support of .NET Core 5 RC 1.</releaseNotes>
 		<copyright>Copyright (c) 2013-2016 Andrey Taritsyn - http://www.taritsyn.ru</copyright>
 		<language>en-US</language>
 		<tags>Douglas Crockford JSMin JavaScript JS Minification Minifier Minify</tags>
 		<dependencies>
 			<group targetFramework=".NETFramework4.0-Client" />
+			<group targetFramework=".NETFramework4.5.1" />
+			<group targetFramework=".NETPlatform5.4">
+				<dependency id="System.IO" version="4.0.11-beta-23516" />
+				<dependency id="System.Runtime" version="4.0.21-beta-23516" />
+				<dependency id="System.Threading" version="4.0.11-beta-23516" />
+			</group>
 		</dependencies>
+		<frameworkAssemblies>
+			<frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.5.1" />
+			<frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.5.1" />
+		</frameworkAssemblies>
 		<references>
 			<reference file="DouglasCrockford.JsMin.dll" />
 		</references>
 	</metadata>
+	<files>
+		<file src="**\*.*" exclude="build-package.cmd" />
+	</files>
 </package>

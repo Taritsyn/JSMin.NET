@@ -11,7 +11,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
+#if !DOTNET5_4
 [assembly: Guid("0d7b205c-e3d6-4756-9977-29a71052536b")]
+#endif
 
 [assembly: AssemblyVersion("1.0.1.0")]
 [assembly: AssemblyFileVersion("1.0.1.0")]
