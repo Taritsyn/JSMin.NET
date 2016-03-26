@@ -36,14 +36,14 @@ namespace DouglasCrockford.JsMin
 	/// <summary>
 	/// The JavaScript Minifier
 	/// </summary>
-    public sealed class JsMinifier
-    {
-        const int EOF = -1;
+	public sealed class JsMinifier
+	{
+		const int EOF = -1;
 
 		private StringReader _reader;
 		private StringWriter _writer;
 
-        private int _theA;
+		private int _theA;
 		private int _theB;
 		private int _theLookahead = EOF;
 		private int _theX = EOF;
@@ -413,8 +413,8 @@ namespace DouglasCrockford.JsMin
 		/// </summary>
 		/// <param name="c">The character</param>
 		private void Put(int c)
-        {
-            _writer.Write((char)c);
+		{
+			_writer.Write((char)c);
 		}
 
 		#endregion
