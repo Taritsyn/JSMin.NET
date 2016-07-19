@@ -44,6 +44,8 @@
     <Compile Include="JsMinificationException.cs" />
     <Compile Include="JsMinifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\CharExtensions.cs" />
+    <Compile Include="Utilities\StringBuilderExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\tools\Key.snk">

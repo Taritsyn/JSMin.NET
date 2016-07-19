@@ -30,6 +30,9 @@ SOFTWARE.
 
 using System;
 using System.IO;
+using System.Text;
+
+using DouglasCrockford.JsMin.Utilities;
 
 namespace DouglasCrockford.JsMin
 {
@@ -38,8 +41,14 @@ namespace DouglasCrockford.JsMin
 	/// </summary>
 	public sealed class JsMinifier
 	{
+		/// <summary>
+		/// Average compression ratio
+		/// </summary>
+		const double AVERAGE_COMPRESSION_RATIO = 0.6;
+
 		const int EOF = -1;
 
+		private StringBuilder _sb;
 		private StringReader _reader;
 		private StringWriter _writer;
 
@@ -72,17 +81,40 @@ namespace DouglasCrockford.JsMin
 				_theX = EOF;
 				_theY = EOF;
 
-				using (_reader = new StringReader(content))
-				using (_writer = new StringWriter())
+				int estimatedCapacity = (int)Math.Floor(content.Length * AVERAGE_COMPRESSION_RATIO);
+				if (_sb == null)
+				{
+					_sb = new StringBuilder(estimatedCapacity);
+				}
+				else
+				{
+					_sb.Capacity = estimatedCapacity;
+				}
+
+				_reader = new StringReader(content);
+				_writer = new StringWriter(_sb);
+
+				try
 				{
 					InnerMinify();
 					_writer.Flush();
 
-					minifiedContent = _writer.ToString().TrimStart();
+					minifiedContent = _sb.TrimStart().ToString();
 				}
+				catch (JsMinificationException)
+				{
+					throw;
+				}
+				finally
+				{
+					_reader.Dispose();
+					_reader = null;
 
-				_reader = null;
-				_writer = null;
+					_writer.Dispose();
+					_writer = null;
+
+					_sb.Clear();
+				}
 			}
 
 			return minifiedContent;

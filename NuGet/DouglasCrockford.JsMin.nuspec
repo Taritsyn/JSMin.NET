@@ -12,7 +12,7 @@
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>JSMin.NET is a .NET port of the Douglas Crockford's JSMin (http://github.com/douglascrockford/JSMin).</description>
 		<summary>JSMin.NET is a .NET port of the Douglas Crockford's JSMin.</summary>
-		<releaseNotes>Added support of .NET Core 1.0 RTM.</releaseNotes>
+		<releaseNotes>Optimized memory usage.</releaseNotes>
 		<copyright>Copyright (c) 2013-2016 Andrey Taritsyn - http://www.taritsyn.ru</copyright>
 		<language>en-US</language>
 		<tags>Douglas Crockford JSMin JavaScript JS Minification Minifier Minify</tags>
@@ -21,6 +21,7 @@
 			<group targetFramework=".NETStandard1.1">
 				<dependency id="System.IO" version="4.1.0" />
 				<dependency id="System.Runtime" version="4.1.0" />
+				<dependency id="System.Runtime.Extensions" version="4.1.0" />
 				<dependency id="System.Runtime.InteropServices" version="4.1.0" />
 				<dependency id="System.Threading" version="4.0.11" />
 			</group>
