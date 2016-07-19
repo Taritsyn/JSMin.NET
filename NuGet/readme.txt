@@ -1,7 +1,7 @@
 ﻿
 
    ----------------------------------------------------------------------
-                    README file for JSMin for .Net v1.1.0
+                    README file for JSMin for .Net v1.1.1
 
    ----------------------------------------------------------------------
 
@@ -17,7 +17,7 @@
    =============
    RELEASE NOTES
    =============
-   Added support of .NET Core 1.0 RTM.
+   Optimized memory usage.
 
    =============
    DOCUMENTATION
