@@ -41,16 +41,29 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JsMinificationException.cs" />
-    <Compile Include="JsMinifier.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\CharExtensions.cs" />
-    <Compile Include="Utilities\StringBuilderExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\..\tools\Key.snk">
       <Link>Key.snk</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\DouglasCrockford.JsMin\JsMinificationException.cs">
+      <Link>JsMinificationException.cs</Link>
+    </Compile>
+    <Compile Include="..\DouglasCrockford.JsMin\JsMinifier.cs">
+      <Link>JsMinifier.cs</Link>
+    </Compile>
+    <Compile Include="..\DouglasCrockford.JsMin\Properties\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\DouglasCrockford.JsMin\Utilities\CharExtensions.cs">
+      <Link>Utilities\CharExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\DouglasCrockford.JsMin\Utilities\StringBuilderExtensions.cs">
+      <Link>Utilities\StringBuilderExtensions.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
