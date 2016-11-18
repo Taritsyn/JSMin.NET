@@ -1,9 +1,9 @@
-﻿namespace DouglasCrockford.JsMin.Test
+﻿using Xunit;
+
+using DouglasCrockford.JsMin;
+
+namespace DouglasCrockford.JsMin.Test
 {
-	using Xunit;
-
-	using JsMin;
-
 	public class JsMinifierTests
 	{
 		[Fact]
