@@ -1,11 +1,11 @@
 ﻿
 
-   ----------------------------------------------------------------------
-                    README file for JSMin for .Net v1.1.1
+   --------------------------------------------------------------------------------
+                         README file for JSMin for .Net v1.1.2
 
-   ----------------------------------------------------------------------
+   --------------------------------------------------------------------------------
 
-      Copyright (c) 2013-2016 Andrey Taritsyn - http://www.taritsyn.ru
+           Copyright (c) 2013-2017 Andrey Taritsyn - http://www.taritsyn.ru
 
 
    ===========
@@ -17,10 +17,10 @@
    =============
    RELEASE NOTES
    =============
-   Optimized memory usage.
+   1. Added support of .NET Core 1.0.3;
+   2. `JsMinificationException` class was made serializable.
 
    =============
    DOCUMENTATION
    =============
-   See more information on GitHub -
-   http://github.com/Taritsyn/JSMin.NET
+   See more information on GitHub - http://github.com/Taritsyn/JSMin.NET
