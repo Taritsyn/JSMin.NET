@@ -17,8 +17,7 @@
    =============
    RELEASE NOTES
    =============
-   1. Added support of .NET Core 1.0.3;
-   2. `JsMinificationException` class was made serializable.
+   Added support of .NET Core 1.0.4.
 
    =============
    DOCUMENTATION

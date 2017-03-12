@@ -1,20 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B9F90C7A-C39E-48AA-B959-0C163ABFDED3}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{06134ABE-D9A1-4D4D-9DBB-9187A4709227}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{67E56EE9-75BA-4CDE-8F7A-CDFCC1FC4447}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DouglasCrockford.JsMin", "src\DouglasCrockford.JsMin\DouglasCrockford.JsMin.xproj", "{6043ADBE-EA02-45F2-AB24-1683E367DD88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DouglasCrockford.JsMin", "src\DouglasCrockford.JsMin\DouglasCrockford.JsMin.csproj", "{6043ADBE-EA02-45F2-AB24-1683E367DD88}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DouglasCrockford.JsMin.Test", "test\DouglasCrockford.JsMin.Test\DouglasCrockford.JsMin.Test.xproj", "{07D76AA7-017F-4E75-A180-08E620F1B17A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DouglasCrockford.JsMin.Test", "test\DouglasCrockford.JsMin.Test\DouglasCrockford.JsMin.Test.csproj", "{07D76AA7-017F-4E75-A180-08E620F1B17A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
