@@ -17,7 +17,8 @@
    =============
    RELEASE NOTES
    =============
-   Added support of .NET Core 1.0.4.
+   1. Added support of .NET Core 1.0.4;
+   2. Downgraded .NET Standard version from 1.1 to 1.0.
 
    =============
    DOCUMENTATION

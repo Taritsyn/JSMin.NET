@@ -1,5 +1,5 @@
 ﻿using System;
-#if !NETSTANDARD1_1
+#if !NETSTANDARD1_0
 using System.Runtime.Serialization;
 #endif
 
@@ -8,7 +8,7 @@ namespace DouglasCrockford.JsMin
 	/// <summary>
 	/// The exception that is thrown when a minification of asset code by JSMin is failed
 	/// </summary>
-#if !NETSTANDARD1_1
+#if !NETSTANDARD1_0
 	[Serializable]
 #endif
 	public sealed class JsMinificationException : Exception
@@ -32,7 +32,7 @@ namespace DouglasCrockford.JsMin
 		public JsMinificationException(string message, Exception innerException)
 			: base(message, innerException)
 		{ }
-#if !NETSTANDARD1_1
+#if !NETSTANDARD1_0
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="JsMinificationException"/> class with serialized data
