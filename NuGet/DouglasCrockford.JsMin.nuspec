@@ -20,7 +20,7 @@
 		<dependencies>
 			<group targetFramework=".NETFramework4.0-Client" />
 			<group targetFramework=".NETStandard1.0">
-				<dependency id="NETStandard.Library" version="1.6.0" exclude="Build,Analyzers" />
+				<dependency id="NETStandard.Library" version="1.6.0" />
 			</group>
 		</dependencies>
 		<references>
