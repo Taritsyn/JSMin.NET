@@ -13,9 +13,10 @@ rmdir lib /Q/S
 %net40_msbuild% "%net4_project_source_dir%\%project_name%.Net40.csproj" /p:Configuration=Release
 xcopy %net4_project_bin_dir%\%project_name%.dll lib\net40-client\
 
-%dotnet_cli% build "%dotnet_project_source_dir%" --framework netstandard1.1 --configuration Release --no-dependencies --no-incremental
-xcopy "%dotnet_project_bin_dir%\netstandard1.1\%project_name%.dll" lib\netstandard1.1\ /E
-xcopy "%dotnet_project_bin_dir%\netstandard1.1\%project_name%.xml" lib\netstandard1.1\ /E
+%dotnet_cli% restore "%dotnet_project_source_dir%"
+%dotnet_cli% build "%dotnet_project_source_dir%" --framework netstandard1.0 --configuration Release --no-dependencies --no-incremental
+xcopy "%dotnet_project_bin_dir%\netstandard1.0\%project_name%.dll" lib\netstandard1.0\ /E
+xcopy "%dotnet_project_bin_dir%\netstandard1.0\%project_name%.xml" lib\netstandard1.0\ /E
 
 copy ..\LICENSE license.txt /Y
 
