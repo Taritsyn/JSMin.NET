@@ -56,5 +56,5 @@ In addition, we provide handling of the <code title="DouglasCrockford.JsMin.JsMi
 ## Who's Using JSMin for .Net
 If you use the JSMin for .Net in some project, please send me a message so I can include it in this list:
 
- * [Bundle Transformer](http://bundletransformer.codeplex.com/) by Andrey Taritsyn
- * [DynamicScriptBundling](http://github.com/rajyraman/DynamicScriptBundling) by Natraj Yegnaraman
+ * [Bundle Transformer](https://github.com/Taritsyn/BundleTransformer) by Andrey Taritsyn
+ * [DynamicScriptBundling](https://github.com/rajyraman/DynamicScriptBundling) by Natraj Yegnaraman
