@@ -1,4 +1,4 @@
-JSMin for .Net
+JSMin for .Net [![NuGet version](http://img.shields.io/nuget/v/DouglasCrockford.JsMin.svg)](https://www.nuget.org/packages/DouglasCrockford.JsMin/)  [![Download count](https://img.shields.io/nuget/dt/DouglasCrockford.JsMin.svg)](https://www.nuget.org/packages/DouglasCrockford.JsMin/)
 ==============
 
 JSMin.NET is a .NET port of the [Douglas Crockford's JSMin](http://github.com/douglascrockford/JSMin).
