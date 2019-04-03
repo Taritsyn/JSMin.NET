@@ -1,12 +1,13 @@
-﻿using Xunit;
+﻿using NUnit.Framework;
 
 using DouglasCrockford.JsMin;
 
 namespace DouglasCrockford.JsMin.Test
 {
+	[TestFixture]
 	public class JsMinifierTests
 	{
-		[Fact]
+		[Test]
 		public void JsMinificationIsCorrect()
 		{
 			// Arrange
@@ -60,7 +61,7 @@ namespace DouglasCrockford.JsMin.Test
 			string output = minifier.Minify(input);
 
 			// Assert
-			Assert.Equal(targetOutput, output);
+			Assert.AreEqual(targetOutput, output);
 		}
 	}
 }
