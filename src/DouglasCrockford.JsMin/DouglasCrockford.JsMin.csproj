@@ -23,7 +23,8 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>Douglas;Crockford;JSMin;JavaScript;JS;Minification;Minifier;Minify</PackageTags>
 		<PackageReleaseNotes>1. Added an overloaded version of the `Minify` method that takes a instance of string builder. This will allow to integrate minifier with the external string builder pools;
-2. Added support of .NET Framework 4.5 and .NET Standard 2.0.</PackageReleaseNotes>
+2. Added a `GetEstimatedOutputLength` static method that can be used to calculate the capacity of string builder;
+3. Added support of .NET Framework 4.5 and .NET Standard 2.0.</PackageReleaseNotes>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
 		<GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>

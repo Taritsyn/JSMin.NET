@@ -64,6 +64,16 @@ namespace DouglasCrockford.JsMin
 
 
 		/// <summary>
+		/// Gets a estimated length of minififation output
+		/// </summary>
+		/// <param name="content">JavaScript content</param>
+		/// <returns>Estimated length of minififation output</returns>
+		public static int GetEstimatedOutputLength(string content)
+		{
+			return (int)Math.Floor(content.Length * AVERAGE_COMPRESSION_RATIO);
+		}
+
+		/// <summary>
 		/// Removes a comments and unnecessary whitespace from JavaScript code
 		/// </summary>
 		/// <param name="content">JavaScript content</param>
@@ -80,7 +90,7 @@ namespace DouglasCrockford.JsMin
 				return string.Empty;
 			}
 
-			int estimatedCapacity = (int)Math.Floor(content.Length * AVERAGE_COMPRESSION_RATIO);
+			int estimatedCapacity = GetEstimatedOutputLength(content);
 			var outputBuilder = new StringBuilder(estimatedCapacity);
 			MinifyInternal(content, outputBuilder);
 

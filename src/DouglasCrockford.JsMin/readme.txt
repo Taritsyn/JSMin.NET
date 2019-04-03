@@ -20,7 +20,9 @@
    1. Added an overloaded version of the `Minify` method that takes a instance of
       string builder. This will allow to integrate minifier with the external
       string builder pools;
-   2. Added support of .NET Framework 4.5 and .NET Standard 2.0.
+   2. Added a `GetEstimatedOutputLength` static method that can be used to
+      calculate the capacity of string builder;
+   3. Added support of .NET Framework 4.5 and .NET Standard 2.0.
 
    =============
    DOCUMENTATION
