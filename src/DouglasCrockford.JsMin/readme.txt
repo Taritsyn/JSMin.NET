@@ -17,7 +17,7 @@
    =============
    RELEASE NOTES
    =============
-   Added support of .NET Framework 4.5.
+   Added support of .NET Framework 4.5 and .NET Standard 2.0.
 
    =============
    DOCUMENTATION
