@@ -5,7 +5,7 @@
 
    --------------------------------------------------------------------------------
 
-           Copyright (c) 2013-2017 Andrey Taritsyn - http://www.taritsyn.ru
+           Copyright (c) 2013-2019 Andrey Taritsyn - http://www.taritsyn.ru
 
 
    ===========
@@ -17,8 +17,7 @@
    =============
    RELEASE NOTES
    =============
-   1. Added support of .NET Core 1.0.4;
-   2. Downgraded .NET Standard version from 1.1 to 1.0.
+   Added support of .NET Framework 4.5.
 
    =============
    DOCUMENTATION
