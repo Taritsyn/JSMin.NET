@@ -15,7 +15,7 @@
 		<Title>$(Product)</Title>
 		<Authors>Andrey Taritsyn</Authors>
 		<Description>JSMin.NET is a .NET port of the Douglas Crockford's JSMin (http://github.com/douglascrockford/JSMin).</Description>
-		<PackageLicenseUrl>https://github.com/Taritsyn/JSMin.NET/blob/master/LICENSE</PackageLicenseUrl>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageProjectUrl>https://github.com/Taritsyn/JSMin.NET</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/Taritsyn/JSMin.NET/master/images/JSMin_Logo128x128.png</PackageIconUrl>
@@ -38,6 +38,11 @@
 		<Content Include="readme.txt">
 			<PackagePath>readme.txt</PackagePath>
 			<Pack>true</Pack>
+		</Content>
+		<Content Include="../../LICENSE.txt">
+			<PackagePath>$(PackageLicenseFile)</PackagePath>
+			<Pack>true</Pack>
+			<Visible>false</Visible>
 		</Content>
 	</ItemGroup>
 
