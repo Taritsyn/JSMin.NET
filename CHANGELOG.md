@@ -1,6 +1,11 @@
 Change log
 ==========
 
+## v2.0.0 - April 3, 2019
+ * Added an overloaded version of the `Minify` method that takes a instance of string builder. This will allow to integrate minifier with the external string builder pools
+ * Added a `GetEstimatedOutputLength` static method that can be used to calculate the capacity of string builder
+ * Added support of .NET Framework 4.5 and .NET Standard 2.0
+
 ## v1.1.3 - March 25, 2017
  * Added support of .NET Core 1.0.4
  * Downgraded .NET Standard version from 1.1 to 1.0
