@@ -48,7 +48,6 @@ namespace DouglasCrockford.JsMin
 
 		const int EOF = -1;
 
-		private StringBuilder _sb;
 		private StringReader _reader;
 		private StringWriter _writer;
 
@@ -69,10 +68,55 @@ namespace DouglasCrockford.JsMin
 		/// </summary>
 		/// <param name="content">JavaScript content</param>
 		/// <returns>Minified JavaScript content</returns>
-		public String Minify(string content)
+		public string Minify(string content)
 		{
-			string minifiedContent;
+			if (content == null)
+			{
+				throw new ArgumentNullException(nameof(content));
+			}
 
+			if (string.IsNullOrWhiteSpace(content))
+			{
+				return string.Empty;
+			}
+
+			int estimatedCapacity = (int)Math.Floor(content.Length * AVERAGE_COMPRESSION_RATIO);
+			var outputBuilder = new StringBuilder(estimatedCapacity);
+			MinifyInternal(content, outputBuilder);
+
+			string minifiedContent = outputBuilder.ToString();
+			outputBuilder.Clear();
+
+			return minifiedContent;
+		}
+
+		/// <summary>
+		/// Removes a comments and unnecessary whitespace from JavaScript code
+		/// </summary>
+		/// <param name="content">JavaScript content</param>
+		/// <param name="outputBuilder">String builder to which to send minification output</param>
+		public void Minify(string content, StringBuilder outputBuilder)
+		{
+			if (content == null)
+			{
+				throw new ArgumentNullException(nameof(content));
+			}
+
+			if (outputBuilder == null)
+			{
+				throw new ArgumentNullException(nameof(outputBuilder));
+			}
+
+			if (string.IsNullOrWhiteSpace(content))
+			{
+				return;
+			}
+
+			MinifyInternal(content, outputBuilder);
+		}
+
+		private void MinifyInternal(string content, StringBuilder outputBuilder)
+		{
 			lock (_minificationSynchronizer)
 			{
 				_theA = 0;
@@ -81,28 +125,18 @@ namespace DouglasCrockford.JsMin
 				_theX = EOF;
 				_theY = EOF;
 
-				int estimatedCapacity = (int)Math.Floor(content.Length * AVERAGE_COMPRESSION_RATIO);
-				if (_sb == null)
-				{
-					_sb = new StringBuilder(estimatedCapacity);
-				}
-				else
-				{
-					_sb.Capacity = estimatedCapacity;
-				}
-
 				_reader = new StringReader(content);
-				_writer = new StringWriter(_sb);
+				_writer = new StringWriter(outputBuilder);
 
 				try
 				{
-					InnerMinify();
+					StartMinification();
 					_writer.Flush();
-
-					minifiedContent = _sb.TrimStart().ToString();
+					outputBuilder.TrimStart();
 				}
 				catch (JsMinificationException)
 				{
+					outputBuilder.Clear();
 					throw;
 				}
 				finally
@@ -112,12 +146,8 @@ namespace DouglasCrockford.JsMin
 
 					_writer.Dispose();
 					_writer = null;
-
-					_sb.Clear();
 				}
 			}
-
-			return minifiedContent;
 		}
 
 		/// <summary>
@@ -363,7 +393,7 @@ namespace DouglasCrockford.JsMin
 		/// Comments will be removed. Tabs will be replaced with spaces.
 		/// Carriage returns will be replaced with linefeeds. Most spaces and linefeeds will be removed.
 		/// </summary>
-		private void InnerMinify()
+		private void StartMinification()
 		{
 			if (Peek() == 0xEF)
 			{
