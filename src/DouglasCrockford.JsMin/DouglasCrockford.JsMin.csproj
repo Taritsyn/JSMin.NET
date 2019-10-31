@@ -18,7 +18,7 @@
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageProjectUrl>https://github.com/Taritsyn/JSMin.NET</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/Taritsyn/JSMin.NET/master/images/JSMin_Logo128x128.png</PackageIconUrl>
+		<PackageIcon>icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/Taritsyn/JSMin.NET</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>Douglas;Crockford;JSMin;JavaScript;JS;Minification;Minifier;Minify</PackageTags>
@@ -34,14 +34,20 @@
 	<Import Project="../../build/nuget-common.props" />
 
 	<ItemGroup>
-		<Content Include="readme.txt">
-			<PackagePath>readme.txt</PackagePath>
+		<None Include="../../images/JSMin_Logo_128x128.png">
+			<PackagePath>$(PackageIcon)</PackagePath>
 			<Pack>true</Pack>
-		</Content>
-		<Content Include="../../LICENSE.txt">
+			<Visible>false</Visible>
+		</None>
+		<None Include="../../LICENSE.txt">
 			<PackagePath>$(PackageLicenseFile)</PackagePath>
 			<Pack>true</Pack>
 			<Visible>false</Visible>
+		</None>
+
+		<Content Include="readme.txt">
+			<PackagePath>readme.txt</PackagePath>
+			<Pack>true</Pack>
 		</Content>
 	</ItemGroup>
 
