@@ -17,8 +17,9 @@
    =============
    RELEASE NOTES
    =============
-   The `GetEstimatedOutputLength` method is deprecated. Use a length of input
-   string or any other suitable value instead.
+   1. JSMin was updated to version of October 30, 2019;
+   2. The `GetEstimatedOutputLength` method is deprecated. Use a length of input
+      string or any other suitable value instead.
 
    =============
    DOCUMENTATION

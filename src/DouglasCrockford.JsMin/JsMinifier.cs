@@ -3,9 +3,9 @@
  */
 
 /* jsmin.c
-   2013-03-29
+   2019-10-30
 
-Copyright (c) 2002 Douglas Crockford  (www.crockford.com)
+Copyright (C) 2002 Douglas Crockford  (www.crockford.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -53,7 +53,7 @@ namespace DouglasCrockford.JsMin
 
 		private int _theA;
 		private int _theB;
-		private int _theLookahead = EOF;
+		private int _lookAhead = EOF;
 		private int _theX = EOF;
 		private int _theY = EOF;
 
@@ -131,7 +131,7 @@ namespace DouglasCrockford.JsMin
 			{
 				_theA = 0;
 				_theB = 0;
-				_theLookahead = EOF;
+				_lookAhead = EOF;
 				_theX = EOF;
 				_theY = EOF;
 
@@ -163,18 +163,18 @@ namespace DouglasCrockford.JsMin
 		/// <summary>
 		/// Returns a true if the character is a letter, digit, underscore, dollar sign, or non-ASCII character
 		/// </summary>
-		/// <param name="c">The character</param>
+		/// <param name="codeunit">The character</param>
 		/// <returns>Result of check</returns>
-		private static bool IsAlphanum(int c)
+		private static bool IsAlphanum(int codeunit)
 		{
 			return (
-				(c >= 'a' && c <= 'z')
-				|| (c >= '0' && c <= '9')
-				|| (c >= 'A' && c <= 'Z')
-				|| c == '_'
-				|| c == '$'
-				|| c == '\\'
-				|| c > 126
+				(codeunit >= 'a' && codeunit <= 'z')
+				|| (codeunit >= '0' && codeunit <= '9')
+				|| (codeunit >= 'A' && codeunit <= 'Z')
+				|| codeunit == '_'
+				|| codeunit == '$'
+				|| codeunit == '\\'
+				|| codeunit > 126
 			);
 		}
 
@@ -185,20 +185,20 @@ namespace DouglasCrockford.JsMin
 		/// <returns>The character</returns>
 		private int Get()
 		{
-			int c = _theLookahead;
-			_theLookahead = EOF;
+			int codeunit = _lookAhead;
+			_lookAhead = EOF;
 
-			if (c == EOF)
+			if (codeunit == EOF)
 			{
-				c = _reader.Read();
+				codeunit = _reader.Read();
 			}
 
-			if (c >= ' ' || c == '\n' || c == EOF)
+			if (codeunit >= ' ' || codeunit == '\n' || codeunit == EOF)
 			{
-				return c;
+				return codeunit;
 			}
 
-			if (c == '\r')
+			if (codeunit == '\r')
 			{
 				return '\n';
 			}
@@ -207,14 +207,14 @@ namespace DouglasCrockford.JsMin
 		}
 
 		/// <summary>
-		/// Gets a next character without getting it
+		/// Gets a next character without advancing
 		/// </summary>
 		/// <returns>The character</returns>
 		private int Peek()
 		{
-			_theLookahead = Get();
+			_lookAhead = Get();
 
-			return _theLookahead;
+			return _lookAhead;
 		}
 
 		/// <summary>
@@ -224,18 +224,18 @@ namespace DouglasCrockford.JsMin
 		/// <returns>The character</returns>
 		private int Next()
 		{
-			int c = Get();
+			int codeunit = Get();
 
-			if (c == '/')
+			if (codeunit == '/')
 			{
 				switch (Peek())
 				{
 					case '/':
 						for (;;)
 						{
-							c = Get();
+							codeunit = Get();
 
-							if (c <= '\n')
+							if (codeunit <= '\n')
 							{
 								break;
 							}
@@ -245,7 +245,7 @@ namespace DouglasCrockford.JsMin
 					case '*':
 						Get();
 
-						while (c != ' ')
+						while (codeunit != ' ')
 						{
 							switch (Get())
 							{
@@ -253,7 +253,7 @@ namespace DouglasCrockford.JsMin
 									if (Peek() == '/')
 									{
 										Get();
-										c = ' ';
+										codeunit = ' ';
 									}
 
 									break;
@@ -267,9 +267,9 @@ namespace DouglasCrockford.JsMin
 			}
 
 			_theY = _theX;
-			_theX = c;
+			_theX = codeunit;
 
-			return c;
+			return codeunit;
 		}
 
 		/// <summary>
@@ -278,13 +278,13 @@ namespace DouglasCrockford.JsMin
 		///		2 - Copy B to A. Get the next B. (Delete A).
 		///		3 - Get the next B. (Delete B).
 		/// <code>Action</code> treats a string as a single character.
-		/// Wow! <code>Action</code> recognizes a regular expression
-		/// if it is preceded by <code>(</code> or , or <code>=</code>.
+		/// <code>Action</code> recognizes a regular expression if it is preceded by the likes of
+		/// <code>(</code> or <code>,</code> or <code>=</code>.
 		/// </summary>
-		/// <param name="d">Action type</param>
-		private void Action(int d)
+		/// <param name="determined">Action type</param>
+		private void Action(int determined)
 		{
-			if (d == 1)
+			if (determined == 1)
 			{
 				Put(_theA);
 
@@ -298,7 +298,7 @@ namespace DouglasCrockford.JsMin
 				}
 			}
 
-			if (d <= 2)
+			if (determined <= 2)
 			{
 				_theA = _theB;
 
@@ -328,14 +328,15 @@ namespace DouglasCrockford.JsMin
 				}
 			}
 
-			if (d <= 3)
+			if (determined <= 3)
 			{
 				_theB = Next();
 				if (_theB == '/' && (
 					_theA == '(' || _theA == ',' || _theA == '=' || _theA == ':'
 					|| _theA == '[' || _theA == '!' || _theA == '&' || _theA == '|'
 					|| _theA == '?' || _theA == '+' || _theA == '-' || _theA == '~'
-					|| _theA == '*' || _theA == '/' || _theA == '{' || _theA == '\n'
+					|| _theA == '*' || _theA == '/' || _theA == '{' || _theA == '}'
+					|| _theA == ';'
 				))
 				{
 					Put(_theA);
