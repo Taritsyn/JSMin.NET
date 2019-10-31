@@ -68,6 +68,7 @@ namespace DouglasCrockford.JsMin
 		/// </summary>
 		/// <param name="content">JavaScript content</param>
 		/// <returns>Estimated length of minififation output</returns>
+		[Obsolete("Use a length of input string or any other suitable value")]
 		public static int GetEstimatedOutputLength(string content)
 		{
 			return (int)Math.Floor(content.Length * AVERAGE_COMPRESSION_RATIO);
@@ -90,8 +91,7 @@ namespace DouglasCrockford.JsMin
 				return string.Empty;
 			}
 
-			int estimatedCapacity = GetEstimatedOutputLength(content);
-			var outputBuilder = new StringBuilder(estimatedCapacity);
+			var outputBuilder = new StringBuilder(content.Length);
 			MinifyInternal(content, outputBuilder);
 
 			string minifiedContent = outputBuilder.ToString();
