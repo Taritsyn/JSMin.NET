@@ -1,6 +1,11 @@
 Change log
 ==========
 
+## v2.1.0 - October 31, 2019
+ * JSMin was updated to version of October 30, 2019
+ * The `GetEstimatedOutputLength` method is deprecated. Use a length of input string or any other suitable value instead
+ * Enabled a SourceLink in NuGet package
+
 ## v2.0.0 - April 3, 2019
  * Added an overloaded version of the `Minify` method that takes a instance of string builder. This will allow to integrate minifier with the external string builder pools
  * Added a `GetEstimatedOutputLength` static method that can be used to calculate the capacity of string builder

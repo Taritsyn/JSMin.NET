@@ -1,7 +1,7 @@
 JSMin for .Net [![NuGet version](http://img.shields.io/nuget/v/DouglasCrockford.JsMin.svg)](https://www.nuget.org/packages/DouglasCrockford.JsMin/)  [![Download count](https://img.shields.io/nuget/dt/DouglasCrockford.JsMin.svg)](https://www.nuget.org/packages/DouglasCrockford.JsMin/)
 ==============
 
-JSMin.NET is a .NET port of the [Douglas Crockford's JSMin](http://github.com/douglascrockford/JSMin).
+JSMin.NET is a .NET port of the [Douglas Crockford's JSMin](https://github.com/douglascrockford/JSMin).
 
 ## Installation
 This library can be installed through NuGet - [http://nuget.org/packages/DouglasCrockford.JsMin](http://nuget.org/packages/DouglasCrockford.JsMin).
@@ -51,7 +51,7 @@ Then we minify a JavaScript code by using of the `Minify` method and output its 
 In addition, we provide handling of the <code title="DouglasCrockford.JsMin.JsMinificationException">JsMinificationException</code> exception.
 
 ## License
-[Douglas Crockford's License](https://github.com/Taritsyn/JSMin.NET/blob/master/LICENSE)
+[Douglas Crockford's License](https://github.com/Taritsyn/JSMin.NET/blob/master/LICENSE.txt)
 
 ## Who's Using JSMin for .Net
 If you use the JSMin for .Net in some project, please send me a message so I can include it in this list:

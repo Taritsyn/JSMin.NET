@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<Product>JSMin for .NET</Product>
-		<VersionPrefix>2.0.0</VersionPrefix>
+		<VersionPrefix>2.1.0</VersionPrefix>
 		<TargetFrameworks>net40-client;net45;netstandard1.0;netstandard2.0</TargetFrameworks>
 		<NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.0' ">1.6.0</NetStandardImplicitPackageVersion>
 		<OutputType>Library</OutputType>
@@ -14,7 +14,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Title>$(Product)</Title>
 		<Authors>Andrey Taritsyn</Authors>
-		<Description>JSMin.NET is a .NET port of the Douglas Crockford's JSMin (http://github.com/douglascrockford/JSMin).</Description>
+		<Description>JSMin.NET is a .NET port of the Douglas Crockford's JSMin (https://github.com/douglascrockford/JSMin).</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageProjectUrl>https://github.com/Taritsyn/JSMin.NET</PackageProjectUrl>

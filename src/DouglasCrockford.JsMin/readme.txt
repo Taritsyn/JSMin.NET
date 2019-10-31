@@ -1,7 +1,7 @@
 ﻿
 
    --------------------------------------------------------------------------------
-                         README file for JSMin for .Net v1.1.3
+                         README file for JSMin for .NET v2.1.0
 
    --------------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@
    DESCRIPTION
    ===========
    A .NET port of the Douglas Crockford's JSMin
-   (http://github.com/douglascrockford/JSMin).
+   (https://github.com/douglascrockford/JSMin).
 
    =============
    RELEASE NOTES
