@@ -167,9 +167,15 @@ namespace DouglasCrockford.JsMin
 		/// <returns>Result of check</returns>
 		private static bool IsAlphanum(int c)
 		{
-			return ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') ||
-				(c >= 'A' && c <= 'Z') || c == '_' || c == '$' || c == '\\' ||
-				c > 126);
+			return (
+				(c >= 'a' && c <= 'z')
+				|| (c >= '0' && c <= '9')
+				|| (c >= 'A' && c <= 'Z')
+				|| c == '_'
+				|| c == '$'
+				|| c == '\\'
+				|| c > 126
+			);
 		}
 
 		/// <summary>
@@ -283,9 +289,9 @@ namespace DouglasCrockford.JsMin
 				Put(_theA);
 
 				if (
-					(_theY == '\n' || _theY == ' ') &&
-					(_theA == '+' || _theA == '-' || _theA == '*' || _theA == '/') &&
-					(_theB == '+' || _theB == '-' || _theB == '*' || _theB == '/')
+					(_theY == '\n' || _theY == ' ')
+					&& (_theA == '+' || _theA == '-' || _theA == '*' || _theA == '/')
+					&& (_theB == '+' || _theB == '-' || _theB == '*' || _theB == '/')
 				)
 				{
 					Put(_theY);
@@ -326,10 +332,10 @@ namespace DouglasCrockford.JsMin
 			{
 				_theB = Next();
 				if (_theB == '/' && (
-					_theA == '(' || _theA == ',' || _theA == '=' || _theA == ':' ||
-					_theA == '[' || _theA == '!' || _theA == '&' || _theA == '|' ||
-					_theA == '?' || _theA == '+' || _theA == '-' || _theA == '~' ||
-					_theA == '*' || _theA == '/' || _theA == '{' || _theA == '\n'
+					_theA == '(' || _theA == ',' || _theA == '=' || _theA == ':'
+					|| _theA == '[' || _theA == '!' || _theA == '&' || _theA == '|'
+					|| _theA == '?' || _theA == '+' || _theA == '-' || _theA == '~'
+					|| _theA == '*' || _theA == '/' || _theA == '{' || _theA == '\n'
 				))
 				{
 					Put(_theA);
