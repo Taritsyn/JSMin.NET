@@ -427,7 +427,11 @@ namespace DouglasCrockford.JsMin
 				switch (_theA)
 				{
 					case ' ':
-						Action(IsAlphanum(_theB) ? 1 : 2);
+						Action(
+							IsAlphanum(_theB)
+							? 1
+							: 2
+						);
 						break;
 					case '\n':
 						switch (_theB)
@@ -445,7 +449,11 @@ namespace DouglasCrockford.JsMin
 								Action(3);
 								break;
 							default:
-								Action(IsAlphanum(_theB) ? 1 : 2);
+								Action(
+									IsAlphanum(_theB)
+									? 1
+									: 2
+								);
 								break;
 						}
 
@@ -454,7 +462,11 @@ namespace DouglasCrockford.JsMin
 						switch (_theB)
 						{
 							case ' ':
-								Action(IsAlphanum(_theA) ? 1 : 3);
+								Action(
+									IsAlphanum(_theA)
+									? 1
+									: 3
+								);
 								break;
 							case '\n':
 								switch (_theA)
@@ -470,7 +482,11 @@ namespace DouglasCrockford.JsMin
 										Action(1);
 										break;
 									default:
-										Action(IsAlphanum(_theA) ? 1 : 3);
+										Action(
+											IsAlphanum(_theA)
+											? 1
+											: 3
+										);
 										break;
 								}
 
