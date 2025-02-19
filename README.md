@@ -16,33 +16,33 @@ using DouglasCrockford.JsMin;
 
 namespace TestJsMinDotNet
 {
-	class Program
-	{
-		static void Main(string[] args)
-		{
-			const string code = @"function square(num) {
-	return num * num;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            const string code = @"function square(num) {
+    return num * num;
 }";
-			var minifier = new JsMinifier();
+            var minifier = new JsMinifier();
 
-			try
-			{
-				string result = minifier.Minify(code);
+            try
+            {
+                string result = minifier.Minify(code);
 
-				Console.WriteLine("Result of JavaScript minification:");
-				Console.WriteLine();
-				Console.WriteLine(result);
-			}
-			catch (JsMinificationException e)
-			{
-				Console.WriteLine("During minification of JavaScript code an error occurred:");
-				Console.WriteLine();
-				Console.WriteLine(e.Message);
-			}
+                Console.WriteLine("Result of JavaScript minification:");
+                Console.WriteLine();
+                Console.WriteLine(result);
+            }
+            catch (JsMinificationException e)
+            {
+                Console.WriteLine("During minification of JavaScript code an error occurred:");
+                Console.WriteLine();
+                Console.WriteLine(e.Message);
+            }
 
-			Console.ReadLine();
-		}
-	}
+            Console.ReadLine();
+        }
+    }
 }
 ```
 
@@ -53,8 +53,10 @@ In addition, we provide handling of the <code title="DouglasCrockford.JsMin.JsMi
 ## License
 [Douglas Crockford's License](https://github.com/Taritsyn/JSMin.NET/blob/master/LICENSE.txt)
 
-## Who's Using JSMin for .Net
-If you use the JSMin for .Net in some project, please send me a message so I can include it in this list:
+## Who's Using JSMin for .NET
+If you use the JSMin for .NET in some project, please send me a message so I can include it in this list:
 
  * [Bundle Transformer](https://github.com/Taritsyn/BundleTransformer) by Andrey Taritsyn
  * [DynamicScriptBundling](https://github.com/rajyraman/DynamicScriptBundling) by Natraj Yegnaraman
+ * [Smartstore](https://smartstore.com/)
+ * [WorkloadTools](https://github.com/spaghettidba/WorkloadTools) by Gianluca Sartori
