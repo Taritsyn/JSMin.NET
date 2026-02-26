@@ -17,10 +17,7 @@
    =============
    RELEASE NOTES
    =============
-   1. JSMin was updated to version of October 30, 2019;
-   2. The `GetEstimatedOutputLength` method is deprecated. Use a length of input
-      string or any other suitable value instead;
-   3. Enabled a SourceLink in NuGet package.
+   JSMin was updated to version of February 25, 2026.
 
    =============
    DOCUMENTATION

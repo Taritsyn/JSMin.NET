@@ -1,10 +1,10 @@
 JsMinifier.cs
-2019-10-31
+2026-02-26
 
 Copyright (C) 2013-2019 Andrey Taritsyn  (www.taritsyn.ru)
 
 jsmin.c
-2019-10-30
+2026-02-25
 
 Copyright (C) 2002 Douglas Crockford  (www.crockford.com)
 

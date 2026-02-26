@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 
 using NUnit.Framework;
 
@@ -7,80 +8,79 @@ namespace DouglasCrockford.JsMin.Test
 	[TestFixture]
 	public class JsMinifierTests
 	{
-		const string Input = "  \t\r\n" +
-			"// is.js\r\n" +
-			"\r\n" +
-			"// (c) 2001 Douglas Crockford\r\n" +
-			"// 2001 June 3\r\n" +
-			"\r\n\r\n" +
-			"// is\r\n" +
-			"\r\n" +
-			"// The -is- object is used to identify the browser.  Every browser edition\r\n" +
-			"// identifies itself, but there is no standard way of doing it, and some of\r\n" +
-			"// the identification is deceptive. This is because the authors of web\r\n" +
-			"// browsers are liars. For example, Microsoft's IE browsers claim to be\r\n" +
-			"// Mozilla 4. Netscape 6 claims to be version 5.\r\n" +
-			"\r\n" +
-			"// Warning: Do not use this awful, awful code or any other thing like it.\r\n" +
-			"// Seriously.\r\n" +
-			"\r\n" +
-			"var is = {\r\n" +
-			"\tie: navigator.appName == 'Microsoft Internet Explorer',\r\n" +
-			"\tjava: navigator.javaEnabled(),\r\n" +
-			"\tns: navigator.appName == 'Netscape',\r\n" +
-			"\tua: navigator.userAgent.toLowerCase(),\r\n" +
-			"\tversion: parseFloat(navigator.appVersion.substr(21)) ||\r\n" +
-			"             parseFloat(navigator.appVersion),\r\n" +
-			"\twin: navigator.platform == 'Win32'\r\n" +
-			"}\r\n" +
-			"is.mac = is.ua.indexOf('mac') >= 0;\r\n" +
-			"\r\n" +
-			"if (is.ua.indexOf('opera') >= 0) {\r\n" +
-			"\tis.ie = is.ns = false;\r\n" +
-			"\tis.opera = true;\r\n" +
-			"}\r\n" +
-			"\r\n" +
-			"if (is.ua.indexOf('gecko') >= 0) {\r\n" +
-			"\tis.ie = is.ns = false;\r\n" +
-			"\tis.gecko = true;\r\n" +
-			"}" +
-			"\r\n\t  "
-			;
+		const string FilesDirectoryPath = @"Files/";
 
-		const string TargetOutput = "var is={ie:navigator.appName=='Microsoft Internet Explorer',java:navigator.javaEnabled(),ns:navigator.appName=='Netscape',ua:navigator.userAgent.toLowerCase(),version:parseFloat(navigator.appVersion.substr(21))||parseFloat(navigator.appVersion),win:navigator.platform=='Win32'}\n" +
-			"is.mac=is.ua.indexOf('mac')>=0;if(is.ua.indexOf('opera')>=0){is.ie=is.ns=false;is.opera=true;}\n" +
-			"if(is.ua.indexOf('gecko')>=0){is.ie=is.ns=false;is.gecko=true;}"
-			;
+		private JsMinifier _minifier;
 
 
-		[Test]
-		public void JsMinificationIsCorrect()
+		[OneTimeSetUp]
+		public void Init()
 		{
-			// Arrange
-			var minifier = new JsMinifier();
+			_minifier = new JsMinifier();
+		}
 
-			// Act
-			string output = minifier.Minify(Input);
-
-			// Assert
-			Assert.AreEqual(TargetOutput, output);
+		[OneTimeTearDown]
+		public void Cleanup()
+		{
+			_minifier = null;
 		}
 
 		[Test]
-		public void JsMinificationWithExternalStringBuilderIsCorrect()
+		public void RegularExpressionLiteralsMinification()
 		{
 			// Arrange
-			var minifier = new JsMinifier();
-			var sb = new StringBuilder();
+			const string input1 = @"/^\//";
+			const string input2 = @"/^\//.test(a)";
 
 			// Act
-			minifier.Minify(Input, sb);
+			string output1 = _minifier.Minify(input1);
+			string output2 = _minifier.Minify(input2);
+
+			// Assert
+			Assert.AreEqual(input1, output1);
+			Assert.AreEqual(input2, output2);
+		}
+
+		[Test]
+		public void TheIsLibraryCodeMinification()
+		{
+			// Arrange
+			string input = GetFileContent("is.js", "\r\n");
+			string targetOutput = GetFileContent("is.min.js", "\n");
+
+			// Act
+			string output = _minifier.Minify(input);
+
+			// Assert
+			Assert.AreEqual(targetOutput, output);
+		}
+
+		[Test]
+		public void TheIsLibraryCodeMinificationWithExternalStringBuilder()
+		{
+			// Arrange
+			var sb = new StringBuilder();
+
+			string input = GetFileContent("is.js", "\r\n");
+			string targetOutput = GetFileContent("is.min.js", "\n");
+
+			// Act
+			_minifier.Minify(input, sb);
 
 			string output = sb.ToString();
 			sb.Clear();
 
 			// Assert
-			Assert.AreEqual(TargetOutput, output);
+			Assert.AreEqual(targetOutput, output);
+		}
+
+		private static string GetFileContent(string fileName, string lineFeed)
+		{
+			string filePath = Path.Combine(FilesDirectoryPath, fileName);
+			string[] lines = File.ReadAllLines(filePath);
+			string content = string.Join(lineFeed, lines);
+
+			return content;
 		}
 	}
 }

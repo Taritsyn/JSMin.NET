@@ -7,6 +7,7 @@
 		<NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.0' ">1.6.0</NetStandardImplicitPackageVersion>
 		<OutputType>Library</OutputType>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<NoWarn>$(NoWarn);NETSDK1215</NoWarn>
 		<AssemblyOriginatorKeyFile>../../build/Key.snk</AssemblyOriginatorKeyFile>
 		<SignAssembly>true</SignAssembly>
 		<PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
@@ -25,9 +26,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<PackageTags>Douglas;Crockford;JSMin;JavaScript;JS;Minification;Minifier;Minify</PackageTags>
-		<PackageReleaseNotes>1. JSMin was updated to version of October 30, 2019;
-2. The `GetEstimatedOutputLength` method is deprecated. Use a length of input string or any other suitable value instead;
-3. Enabled a SourceLink in NuGet package.</PackageReleaseNotes>
+		<PackageReleaseNotes>JSMin was updated to version of February 25, 2026.</PackageReleaseNotes>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
 		<GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
@@ -36,10 +35,6 @@
 	<Import Project="../../build/common.props" />
 	<Import Project="../../build/net40-client-target.props" />
 	<Import Project="../../build/nuget-common.props" />
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="../../images/JSMin_Logo_128x128.png">
