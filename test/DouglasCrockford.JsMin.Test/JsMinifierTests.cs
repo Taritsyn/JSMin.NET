@@ -74,6 +74,20 @@ namespace DouglasCrockford.JsMin.Test
 			Assert.AreEqual(targetOutput, output);
 		}
 
+		[Test]
+		public void DeconstructLibraryCodeMinification()
+		{
+			// Arrange
+			string input = GetFileContent("deconstruct.js", "\r");
+			string targetOutput = GetFileContent("deconstruct.min.js", "\n");
+
+			// Act
+			string output = _minifier.Minify(input);
+
+			// Assert
+			Assert.AreEqual(targetOutput, output);
+		}
+
 		private static string GetFileContent(string fileName, string lineFeed)
 		{
 			string filePath = Path.Combine(FilesDirectoryPath, fileName);
