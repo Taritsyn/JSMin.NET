@@ -20,7 +20,9 @@
    1. JSMin was updated to version of February 25, 2026;
    2. Changed a implementation of the `StringBuilder.TrimStart` extension method;
    3. Performed a migration to the modern C# null/not-null checks;
-   4. Added support for .NET 10.
+   4. Added support for .NET 10;
+   5. In the `lock` statements for .NET 10 target now uses a instances of the
+      `System.Threading.Lock` class.
 
    =============
    DOCUMENTATION

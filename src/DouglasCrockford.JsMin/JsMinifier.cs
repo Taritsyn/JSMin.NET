@@ -31,6 +31,11 @@ SOFTWARE.
 using System;
 using System.IO;
 using System.Text;
+#if NET10_0_OR_GREATER
+using Lock = System.Threading.Lock;
+#else
+using Lock = System.Object;
+#endif
 
 using DouglasCrockford.JsMin.Utilities;
 
@@ -60,7 +65,7 @@ namespace DouglasCrockford.JsMin
 		/// <summary>
 		/// Synchronizer of minification
 		/// </summary>
-		private readonly object _minificationSynchronizer = new object();
+		private readonly Lock _minificationSynchronizer = new Lock();
 
 
 		/// <summary>
