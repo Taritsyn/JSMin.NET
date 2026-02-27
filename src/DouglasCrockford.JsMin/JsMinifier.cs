@@ -53,8 +53,8 @@ namespace DouglasCrockford.JsMin
 
 		const int EOF = -1;
 
-		private StringReader _reader;
-		private StringWriter _writer;
+		private StringReader? _reader;
+		private StringWriter? _writer;
 
 		private int _theA;
 		private int _theB;
@@ -195,7 +195,7 @@ namespace DouglasCrockford.JsMin
 
 			if (codeunit == EOF)
 			{
-				codeunit = _reader.Read();
+				codeunit = _reader!.Read();
 			}
 
 			if (codeunit >= ' ' || codeunit == '\n' || codeunit == EOF)
@@ -514,7 +514,7 @@ namespace DouglasCrockford.JsMin
 		/// <param name="c">The character</param>
 		private void Put(int c)
 		{
-			_writer.Write((char)c);
+			_writer!.Write((char)c);
 		}
 
 		#endregion
