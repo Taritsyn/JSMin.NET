@@ -17,7 +17,9 @@
    =============
    RELEASE NOTES
    =============
-   JSMin was updated to version of February 25, 2026.
+   1. JSMin was updated to version of February 25, 2026;
+   2. Changed a implementation of the `StringBuilder.TrimStart` extension method;
+   3. Performed a migration to the modern C# null/not-null checks.
 
    =============
    DOCUMENTATION

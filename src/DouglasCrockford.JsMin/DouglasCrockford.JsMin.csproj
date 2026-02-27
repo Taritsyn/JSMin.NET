@@ -24,7 +24,9 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageTags>Douglas;Crockford;JSMin;JavaScript;JS;Minification;Minifier;Minify</PackageTags>
-    <PackageReleaseNotes>JSMin was updated to version of February 25, 2026.</PackageReleaseNotes>
+    <PackageReleaseNotes>1. JSMin was updated to version of February 25, 2026;
+2. Changed a implementation of the `StringBuilder.TrimStart` extension method;
+3. Performed a migration to the modern C# null/not-null checks.</PackageReleaseNotes>
     <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 

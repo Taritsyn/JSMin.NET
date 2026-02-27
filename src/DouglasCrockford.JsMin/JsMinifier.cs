@@ -81,7 +81,7 @@ namespace DouglasCrockford.JsMin
 		/// <returns>Minified JavaScript content</returns>
 		public string Minify(string content)
 		{
-			if (content == null)
+			if (content is null)
 			{
 				throw new ArgumentNullException(nameof(content));
 			}
@@ -107,12 +107,12 @@ namespace DouglasCrockford.JsMin
 		/// <param name="outputBuilder">String builder to which to send minification output</param>
 		public void Minify(string content, StringBuilder outputBuilder)
 		{
-			if (content == null)
+			if (content is null)
 			{
 				throw new ArgumentNullException(nameof(content));
 			}
 
-			if (outputBuilder == null)
+			if (outputBuilder is null)
 			{
 				throw new ArgumentNullException(nameof(outputBuilder));
 			}

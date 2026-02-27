@@ -15,7 +15,7 @@ namespace DouglasCrockford.JsMin.Utilities
 		/// <returns>Instance of <see cref="StringBuilder"/> without leading white-space characters</returns>
 		public static StringBuilder TrimStart(this StringBuilder source)
 		{
-			if (source == null)
+			if (source is null)
 			{
 				throw new ArgumentNullException(nameof(source));
 			}
