@@ -1,6 +1,14 @@
 Change log
 ==========
 
+## v2.2.0 - February 27, 2026
+ * JSMin was updated to version of February 25, 2026
+ * Changed a implementation of the `StringBuilder.TrimStart` extension method
+ * Performed a migration to the modern C# null/not-null checks
+ * Added support for .NET 10
+ * In the `lock` statements for .NET 10 target now uses a instances of the `System.Threading.Lock` class
+ * Added support for nullable reference types
+
 ## v2.1.0 - October 31, 2019
  * JSMin was updated to version of October 30, 2019
  * The `GetEstimatedOutputLength` method is deprecated. Use a length of input string or any other suitable value instead

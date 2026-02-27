@@ -1,11 +1,11 @@
 ﻿
 
    --------------------------------------------------------------------------------
-                         README file for JSMin for .NET v2.1.0
+                         README file for JSMin for .NET v2.2.0
 
    --------------------------------------------------------------------------------
 
-           Copyright (c) 2013-2019 Andrey Taritsyn - http://www.taritsyn.ru
+           Copyright (c) 2013-2026 Andrey Taritsyn - http://www.taritsyn.ru
 
 
    ===========
