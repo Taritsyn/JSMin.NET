@@ -1,7 +1,7 @@
-JSMin for .Net [![NuGet version](http://img.shields.io/nuget/v/DouglasCrockford.JsMin.svg)](https://www.nuget.org/packages/DouglasCrockford.JsMin/)  [![Download count](https://img.shields.io/nuget/dt/DouglasCrockford.JsMin.svg)](https://www.nuget.org/packages/DouglasCrockford.JsMin/)
+JSMin for .NET [![NuGet version](http://img.shields.io/nuget/v/DouglasCrockford.JsMin.svg)](https://www.nuget.org/packages/DouglasCrockford.JsMin/)  [![Download count](https://img.shields.io/nuget/dt/DouglasCrockford.JsMin.svg)](https://www.nuget.org/packages/DouglasCrockford.JsMin/)
 ==============
 
-JSMin.NET is a .NET port of the [Douglas Crockford's JSMin](https://github.com/douglascrockford/JSMin).
+JSMin.NET is a .NET port of the Douglas Crockford's [JSMin](https://github.com/douglascrockford/JSMin).
 
 ## Installation
 This library can be installed through NuGet - [http://nuget.org/packages/DouglasCrockford.JsMin](http://nuget.org/packages/DouglasCrockford.JsMin).

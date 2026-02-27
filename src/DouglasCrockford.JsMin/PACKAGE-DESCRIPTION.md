@@ -1,0 +1,1 @@
+JSMin.NET is a .NET port of the Douglas Crockford's [JSMin](https://github.com/douglascrockford/JSMin).

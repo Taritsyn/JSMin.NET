@@ -7,18 +7,16 @@
     <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.0' ">1.6.0</NetStandardImplicitPackageVersion>
     <OutputType>Library</OutputType>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>$(NoWarn);NETSDK1215</NoWarn>
-    <AssemblyOriginatorKeyFile>../../build/Key.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
-    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <NoWarn>$(NoWarn);CS1591;NETSDK1215</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Title>$(Product)</Title>
     <Authors>Andrey Taritsyn</Authors>
-    <Description>JSMin.NET is a .NET port of the Douglas Crockford's JSMin (https://github.com/douglascrockford/JSMin).</Description>
+    <Description>JSMin.NET is a .NET port of the Douglas Crockford's JSMin.</Description>
+    <PackageReadmeFile>PACKAGE-DESCRIPTION.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/Taritsyn/JSMin.NET</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Taritsyn/JSMin.NET/master/images/JSMin_Logo_128x128.png</PackageIconUrl>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/Taritsyn/JSMin.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -28,30 +26,19 @@
     <PackageTags>Douglas;Crockford;JSMin;JavaScript;JS;Minification;Minifier;Minify</PackageTags>
     <PackageReleaseNotes>JSMin was updated to version of February 25, 2026.</PackageReleaseNotes>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
   </PropertyGroup>
 
   <Import Project="../../build/common.props" />
   <Import Project="../../build/net40-client-target.props" />
+  <Import Project="../../build/strong-name-signing.props" />
   <Import Project="../../build/nuget-common.props" />
 
   <ItemGroup>
-    <None Include="../../images/JSMin_Logo_128x128.png">
-      <PackagePath>$(PackageIcon)</PackagePath>
-      <Pack>true</Pack>
-      <Visible>false</Visible>
-    </None>
-    <None Include="../../LICENSE.txt">
-      <PackagePath>$(PackageLicenseFile)</PackagePath>
-      <Pack>true</Pack>
-      <Visible>false</Visible>
-    </None>
+    <None Include="../../images/JSMin_Logo_128x128.png" PackagePath="$(PackageIcon)" Pack="true" Visible="false" />
+    <None Include="../../LICENSE.txt" PackagePath="$(PackageLicenseFile)" Pack="true" Visible="false" />
 
-    <Content Include="readme.txt">
-      <PackagePath>readme.txt</PackagePath>
-      <Pack>true</Pack>
-    </Content>
+    <Content Include="PACKAGE-DESCRIPTION.md" PackagePath="$(PackageReadmeFile)" Pack="true" />
+    <Content Include="readme.txt" PackagePath="/" Pack="true" />
   </ItemGroup>
 
 </Project>

@@ -11,6 +11,10 @@
     <File Path="build/Key.snk" />
     <File Path="build/net40-client-target.props" />
     <File Path="build/nuget-common.props" />
+    <File Path="build/strong-name-signing.props" />
+  </Folder>
+  <Folder Name="/images/">
+    <File Path="images/JSMin_Logo_128x128.png" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/DouglasCrockford.JsMin/DouglasCrockford.JsMin.csproj" />
