@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace DouglasCrockford.JsMin.Utilities
 {
@@ -14,6 +15,11 @@ namespace DouglasCrockford.JsMin.Utilities
 		/// <returns>Instance of <see cref="StringBuilder"/> without leading white-space characters</returns>
 		public static StringBuilder TrimStart(this StringBuilder source)
 		{
+			if (source == null)
+			{
+				throw new ArgumentNullException(nameof(source));
+			}
+
 			int charCount = source.Length;
 			if (charCount == 0)
 			{
@@ -25,7 +31,7 @@ namespace DouglasCrockford.JsMin.Utilities
 			while (charIndex < charCount)
 			{
 				char charValue = source[charIndex];
-				if (!charValue.IsWhitespace())
+				if (!char.IsWhiteSpace(charValue))
 				{
 					break;
 				}
