@@ -1,0 +1,21 @@
+﻿<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="CHANGELOG.md" />
+    <File Path="global.json" />
+    <File Path="LICENSE.txt" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/build/">
+    <File Path="build/common.props" />
+    <File Path="build/Key.snk" />
+    <File Path="build/net40-client-target.props" />
+    <File Path="build/nuget-common.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/DouglasCrockford.JsMin/DouglasCrockford.JsMin.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/DouglasCrockford.JsMin.Test/DouglasCrockford.JsMin.Test.csproj" />
+  </Folder>
+</Solution>
